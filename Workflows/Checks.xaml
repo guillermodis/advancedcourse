@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1205,5213</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1205,4496</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Checks_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -92,7 +92,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Checks" sap:VirtualizedContainerService.HintSize="1165,5148" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Checks" sap:VirtualizedContainerService.HintSize="1165,4431" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Default="[new List(Of String)]" Name="controleMaanden" />
     </Sequence.Variables>
@@ -101,7 +101,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap2010:Annotation.AnnotationText="Hier wordt gecheckt op uitschieters o.b.v. maandtotalen per kaarthouder. De check wordt gedaan over 3 maanden." DisplayName="Checks" sap:VirtualizedContainerService.HintSize="1123,5060" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence sap2010:Annotation.AnnotationText="Hier wordt gecheckt op uitschieters o.b.v. maandtotalen per kaarthouder. De check wordt gedaan over 3 maanden." DisplayName="Checks" sap:VirtualizedContainerService.HintSize="1123,4343" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <Sequence.Variables>
         <Variable x:TypeArguments="s:String[]" Name="maanden" />
         <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="dt_kaartNummer" />
@@ -138,7 +138,7 @@
           <InArgument x:TypeArguments="s:String[]">[{"januari","februari","maart","april","mei","juni","juli","augustus","september","oktober","november","december"}]</InArgument>
         </Assign.Value>
       </Assign>
-      <Switch x:TypeArguments="x:String" DisplayName="Switch: controleMaanden" Expression="[in_maand]" sap:VirtualizedContainerService.HintSize="1061,162" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+      <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Hier wordt bepaald welke 3 maanden (incl. huidige maand) als controlemaanden gebruikt worden om vervolgens de gemiddelde kosten te kunnen berekenen." DisplayName="Switch: controleMaanden" Expression="[in_maand]" sap:VirtualizedContainerService.HintSize="1061,204" sap2010:WorkflowViewState.IdRef="Switch`1_2">
         <Switch.Default>
           <Sequence sap:VirtualizedContainerService.HintSize="476,459" sap2010:WorkflowViewState.IdRef="Sequence_19">
             <sap:WorkflowViewStateService.ViewState>
@@ -175,6 +175,7 @@
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <Sequence x:Key="januari" sap:VirtualizedContainerService.HintSize="476,454" sap2010:WorkflowViewState.IdRef="Sequence_20">
@@ -238,19 +239,20 @@
           </uasc:AppendItemToCollection>
         </Sequence>
       </Switch>
-      <Sequence DisplayName="Seq: For Each Row in in_dt_updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="1061,4273" sap2010:WorkflowViewState.IdRef="Sequence_23">
+      <Sequence sap2010:Annotation.AnnotationText="Hier wordt de data van een specifieke kaartnummer verzameld uit het totaaloverzicht en geplaatst in een aparte datatable (dt_kaartNummer)" DisplayName="Seq: For Each Row in in_dt_updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="1061,3514" sap2010:WorkflowViewState.IdRef="Sequence_23">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_dt_updateLijstKaarthouders]" DisplayName="For Each Row in in_dt_updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="999,4162" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_dt_updateLijstKaarthouders]" DisplayName="For Each Row in in_dt_updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="999,3372" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
           <ui:ForEachRow.Body>
             <ActivityAction x:TypeArguments="sd:DataRow">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="965,4045" sap2010:WorkflowViewState.IdRef="Sequence_9">
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="965,3255" sap2010:WorkflowViewState.IdRef="Sequence_9">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:String" Name="kaartNummer" />
                   <Variable x:TypeArguments="x:String" Name="naamKaarthouder" />
@@ -288,13 +290,13 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:MultipleAssign>
-                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_dt_totaalOverzicht]" DisplayName="For Each Row in in_dt_totaalOverzicht" sap:VirtualizedContainerService.HintSize="923,3892" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_dt_totaalOverzicht]" DisplayName="For Each Row in in_dt_totaalOverzicht" sap:VirtualizedContainerService.HintSize="923,3102" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
                   <ui:ForEachRow.Body>
                     <ActivityAction x:TypeArguments="sd:DataRow">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="889,3775" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="889,2985" sap2010:WorkflowViewState.IdRef="Sequence_2">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -321,19 +323,20 @@
                             </Sequence>
                           </If.Else>
                         </If>
-                        <Sequence DisplayName="Seq:  For Each Row in dt_kaartNummer" sap:VirtualizedContainerService.HintSize="847,3097" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                        <Sequence sap2010:Annotation.AnnotationText="Hier worden de maandtotalen van de 3 controlemaanden (eerder al bepaald) uit de data (dt_kaartNummer) gehaald om te kunnen gebruiken voor het berekenen van de gemiddelde kosten." DisplayName="Seq:  For Each Row in dt_kaartNummer" sap:VirtualizedContainerService.HintSize="847,2307" sap2010:WorkflowViewState.IdRef="Sequence_24">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_kaartNummer]" DisplayName="For Each Row in dt_kaartNummer" sap:VirtualizedContainerService.HintSize="785,2986" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
+                          <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_kaartNummer]" DisplayName="For Each Row in dt_kaartNummer" sap:VirtualizedContainerService.HintSize="785,2154" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
                             <ui:ForEachRow.Body>
                               <ActivityAction x:TypeArguments="sd:DataRow">
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
                                 </ActivityAction.Argument>
-                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="751,2869" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="751,2037" sap2010:WorkflowViewState.IdRef="Sequence_25">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -446,52 +449,6 @@
                                             </sc:BindingList>
                                           </ui:IfElseIf.ConditionBlocks>
                                         </ui:IfElseIf>
-                                      </Sequence>
-                                    </If.Else>
-                                  </If>
-                                  <If Condition="[CurrentRow(&quot;Maand&quot;).ToString.Equals(controleMaanden(1)) = true]" DisplayName="If: Maand = vorigeMaand" sap:VirtualizedContainerService.HintSize="709,376" sap2010:WorkflowViewState.IdRef="If_6">
-                                    <If.Then>
-                                      <Sequence sap:VirtualizedContainerService.HintSize="400,80" sap2010:WorkflowViewState.IdRef="Sequence_31">
-                                        <Sequence.Variables>
-                                          <Variable x:TypeArguments="x:String" Name="vorigeMaandTotaal" />
-                                        </Sequence.Variables>
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                      </Sequence>
-                                    </If.Then>
-                                    <If.Else>
-                                      <Sequence sap:VirtualizedContainerService.HintSize="400,80" sap2010:WorkflowViewState.IdRef="Sequence_32">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                      </Sequence>
-                                    </If.Else>
-                                  </If>
-                                  <If Condition="[CurrentRow(&quot;Maand&quot;).ToString.Equals(controleMaanden(2)) = true]" DisplayName="If: Maand = tweeVorigeMaand" sap:VirtualizedContainerService.HintSize="709,376" sap2010:WorkflowViewState.IdRef="If_7">
-                                    <If.Then>
-                                      <Sequence sap:VirtualizedContainerService.HintSize="400,80" sap2010:WorkflowViewState.IdRef="Sequence_33">
-                                        <Sequence.Variables>
-                                          <Variable x:TypeArguments="x:String" Name="tweeVorigeMaandTotaal" />
-                                        </Sequence.Variables>
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                      </Sequence>
-                                    </If.Then>
-                                    <If.Else>
-                                      <Sequence sap:VirtualizedContainerService.HintSize="400,80" sap2010:WorkflowViewState.IdRef="Sequence_34">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
                                       </Sequence>
                                     </If.Else>
                                   </If>
