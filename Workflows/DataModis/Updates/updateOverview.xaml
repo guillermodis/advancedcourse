@@ -1,4 +1,13 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Process" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1194,2754" sap2010:WorkflowViewState.IdRef="Process_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_dt_totaalOverzicht" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="io_maand" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1194,2754</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Process_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="66">
       <x:String>System.Activities</x:String>
@@ -84,6 +93,12 @@
       <AssemblyReference>System.Private.Uri</AssemblyReference>
       <AssemblyReference>System.Data.SqlClient</AssemblyReference>
       <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="677,2689" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -98,7 +113,6 @@
       <Variable x:TypeArguments="sd:DataTable" Name="dt_addToDtFiets" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_addToDtBusTramMetro" />
       <Variable x:TypeArguments="x:String" Default="Data\Output\dataNS.xlsx" Name="outputFilePath" />
-      <Variable x:TypeArguments="x:String" Name="maand" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_totaleSpec" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Trein" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Fiets" />
@@ -223,7 +237,7 @@
                     </ui:AssignOperation>
                     <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
                       <ui:AssignOperation.To>
-                        <OutArgument x:TypeArguments="x:String">[maand]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String">[io_maand]</OutArgument>
                       </ui:AssignOperation.To>
                       <ui:AssignOperation.Value>
                         <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(originalText,"(?&lt;=Card - ).*(?= 2022 Factuurdatum)").ToString]</InArgument>
@@ -236,7 +250,13 @@
                 <Switch.Default>
                   <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,62" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="Anders" />
                 </Switch.Default>
-                <Sequence x:Key="Deur-tot-deurdiensten" sap:VirtualizedContainerService.HintSize="400,537" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Sequence x:Key="Deur-tot-deurdiensten" sap:VirtualizedContainerService.HintSize="400,547" sap2010:WorkflowViewState.IdRef="Sequence_16">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -252,7 +272,7 @@
                   <ui:MergeDataTable Destination="[dt_TotaleSpec]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="358,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Add" Source="[dt_addToDtFiets]" />
                   <ui:MergeDataTable Destination="[dt_Fiets]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="358,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_5" MissingSchemaAction="Add" Source="[dt_addToDtFiets]" />
                 </Sequence>
-                <Sequence x:Key="Bus, Tram en Metroreizen" sap:VirtualizedContainerService.HintSize="421,537" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                <Sequence x:Key="Bus, Tram en Metroreizen" sap:VirtualizedContainerService.HintSize="421,547" sap2010:WorkflowViewState.IdRef="Sequence_17">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -268,7 +288,7 @@
                   <ui:MergeDataTable Destination="[dt_TotaleSpec]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="379,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Add" Source="[dt_addToDtBusTramMetro]" />
                   <ui:MergeDataTable Destination="[dt_BusTramMetro]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="379,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_6" MissingSchemaAction="Add" Source="[dt_addToDtBusTramMetro]" />
                 </Sequence>
-                <Sequence x:Key="Treinreizen" sap:VirtualizedContainerService.HintSize="400,537" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                <Sequence x:Key="Treinreizen" sap:VirtualizedContainerService.HintSize="400,547" sap2010:WorkflowViewState.IdRef="Sequence_15">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -299,10 +319,21 @@
       </ui:ForEachFileX>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Totaaloverzicht workflow" sap:VirtualizedContainerService.HintSize="573,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Workflows\DataModis\Totaaloverzicht.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <InArgument x:TypeArguments="x:String" x:Key="in_maand">[maand]</InArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Trein">[dt_Trein]</InArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Fiets">[dt_Fiets]</InArgument>
-          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_BusTramMetro">[dt_BusTramMetro]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_maand">
+            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="io_maand" />
+          </InArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Trein">
+            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_Trein" />
+          </InArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_Fiets">
+            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_Fiets" />
+          </InArgument>
+          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dt_BusTramMetro">
+            <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="dt_BusTramMetro" />
+          </InArgument>
+          <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dt_totaalOverzicht">
+            <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="out_dt_totaalOverzicht" />
+          </OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">

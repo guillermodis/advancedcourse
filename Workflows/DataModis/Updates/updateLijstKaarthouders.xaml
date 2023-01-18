@@ -1,4 +1,12 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="updateLijstKaarthouders" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1194,1152" sap2010:WorkflowViewState.IdRef="updateLijstKaarthouders_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="updateLijstKaarthouders" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_dt_updateLijstKaarthouders" Type="OutArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1194,1152</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>updateLijstKaarthouders_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="30">
       <x:String>System.Activities</x:String>
@@ -83,7 +91,6 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="442,1087" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_updateLijstKaarthouders" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_lijstKaarthouders" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -91,7 +98,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap2010:Annotation.AnnotationText="Hier wordt het overzicht van alle kaarthouders geüpdate. Het nieuwe overzicht wordt vervolgens geplaatst in de sheet &quot;Overzicht Kaarthouders&quot; van het totaaloverzicht (.xlsx-bestand).&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;- geüpdate overzicht: het geüpdate overzicht moet bijgehouden worden door de medewerker, zodat deze up-to-date is wanneer de robot deze uitleest." DisplayName="updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="400,999" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence sap2010:Annotation.AnnotationText="Hier wordt het overzicht van alle kaarthouders geüpdate. Het nieuwe overzicht wordt vervolgens geplaatst in de sheet &quot;Overzicht Kaarthouders&quot; van het totaaloverzicht (.xlsx-bestand).&#xA;&#xA;&#xA;- geüpdate overzicht: het geüpdate overzicht moet bijgehouden worden door de medewerker, zodat deze up-to-date is wanneer de robot deze uitleest." DisplayName="updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="400,999" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -101,7 +108,7 @@
       <ui:LogMessage DisplayName="Log Message: Start updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start updateLijstKaarthouders...&quot;]" />
       <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dt_lijstKaarthouders]" DisplayName="Read Range lijstKaarthouders" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="Overzicht Kaarthouders" WorkbookPath="Data\Output\DataNS.xlsx" />
       <ui:ClearDataTable DataTable="[dt_lijstKaarthouders]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="338,80" sap2010:WorkflowViewState.IdRef="ClearDataTable_1" />
-      <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dt_updateLijstKaarthouders]" DisplayName="Read Range updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Overzicht Kaarthouders" WorkbookPath="Data\UpdateOverview\updateLijstKaarthouders.xlsx">
+      <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_dt_updateLijstKaarthouders]" DisplayName="Read Range updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Overzicht Kaarthouders" WorkbookPath="Data\UpdateOverview\updateLijstKaarthouders.xlsx">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -109,7 +116,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:ReadRange>
-      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dt_updateLijstKaarthouders]" DisplayName="Write Range updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="338,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Overzicht Kaarthouders" WorkbookPath="Data\Output\DataNS.xlsx" />
+      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[out_dt_updateLijstKaarthouders]" DisplayName="Write Range updateLijstKaarthouders" sap:VirtualizedContainerService.HintSize="338,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Overzicht Kaarthouders" WorkbookPath="Data\Output\DataNS.xlsx" />
       <ui:LogMessage DisplayName="Log Message: updateLijstKaarthouders successful" sap:VirtualizedContainerService.HintSize="338,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;updateLijstKaarthouders successful...&quot;]" />
     </Sequence>
   </Sequence>

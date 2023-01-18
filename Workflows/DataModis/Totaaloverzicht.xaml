@@ -4,6 +4,7 @@
     <x:Property Name="in_dt_Trein" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_Fiets" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_dt_BusTramMetro" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_totaalOverzicht" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -107,7 +108,6 @@
   <Sequence DisplayName="Totaaloverzicht" sap:VirtualizedContainerService.HintSize="676,3125" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_data" />
-      <Variable x:TypeArguments="sd:DataTable" Default="[new DataTable]" Name="dt_totaalOverzicht" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_originalTotaaloverzicht" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_kaarthouders" />
     </Sequence.Variables>
@@ -116,7 +116,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence sap2010:Annotation.AnnotationText="Hier wordt het totaaloverzicht aangevuld met de nieuwe data (afkomstig van NS)" DisplayName="Totaaloverzicht" sap:VirtualizedContainerService.HintSize="634,3037" sap2010:WorkflowViewState.IdRef="Sequence_72">
+    <Sequence sap2010:Annotation.AnnotationText="Hier wordt het totaaloverzicht aangevuld met de nieuwe data (afkomstig van NS)." DisplayName="Totaaloverzicht" sap:VirtualizedContainerService.HintSize="634,3037" sap2010:WorkflowViewState.IdRef="Sequence_72">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -740,7 +740,7 @@
                           </ui:MultipleAssign.AssignOperations>
                         </ui:MultipleAssign>
                       </Sequence>
-                      <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[newRow]" DataTable="[dt_totaalOverzicht]" DisplayName="Add Data Row totaalOverzicht" sap:VirtualizedContainerService.HintSize="1061,195" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+                      <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[newRow]" DataTable="[out_dt_totaalOverzicht]" DisplayName="Add Data Row totaalOverzicht" sap:VirtualizedContainerService.HintSize="1061,195" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -760,7 +760,7 @@
               </ui:ForEachRow>
             </Sequence>
             <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="400,90" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[dt_originalTotaaloverzicht.Columns(0).DataType.ToString]" />
-            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="400,90" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[dt_totaalOverzicht.Columns(0).DataType.ToString]" />
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="400,90" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[out_dt_totaalOverzicht.Columns(0).DataType.ToString]" />
           </Sequence>
         </ui:CommentOut.Body>
         <sap:WorkflowViewStateService.ViewState>
@@ -786,7 +786,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:ReadRange>
-      <ui:BuildDataTable DataTable="[dt_totaalOverzicht]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="572,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Kaartnummer&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Naam_x0020_Trainee&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Maand&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Trein&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Fiets&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;BusTramMetro&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Maandtotaal&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
+      <ui:BuildDataTable DataTable="[out_dt_totaalOverzicht]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="572,60" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Kaartnummer&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Naam_x0020_Trainee&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Maand&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Trein&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Fiets&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;BusTramMetro&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Maandtotaal&quot; msdata:Caption=&quot;&quot; type=&quot;xs:double&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1373,7 +1373,7 @@
                     </ui:MultipleAssign.AssignOperations>
                   </ui:MultipleAssign>
                 </Sequence>
-                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[newRow.ItemArray]" DataTable="[dt_totaalOverzicht]" DisplayName="Add DataRow totaalOverzicht" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_4">
+                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[newRow.ItemArray]" DataTable="[out_dt_totaalOverzicht]" DisplayName="Add DataRow totaalOverzicht" sap:VirtualizedContainerService.HintSize="434,186" sap2010:WorkflowViewState.IdRef="AddDataRow_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1404,7 +1404,7 @@
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[CurrentRow.ItemArray]" DataTable="[dt_totaalOverzicht]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="358,186" sap2010:WorkflowViewState.IdRef="AddDataRow_5" />
+              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[CurrentRow.ItemArray]" DataTable="[out_dt_totaalOverzicht]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="358,186" sap2010:WorkflowViewState.IdRef="AddDataRow_5" />
             </Sequence>
           </ActivityAction>
         </ui:ForEachRow.Body>
@@ -1417,7 +1417,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:MergeDataTable Destination="[dt_originalTotaaloverzicht]" DisplayName="Merge dt_totaalOverzicht &gt; dt_originalTotaaloverzicht" sap:VirtualizedContainerService.HintSize="358,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Add" Source="[dt_totaalOverzicht]" />
+            <ui:MergeDataTable Destination="[dt_originalTotaaloverzicht]" DisplayName="Merge dt_totaalOverzicht &gt; dt_originalTotaaloverzicht" sap:VirtualizedContainerService.HintSize="358,133" sap2010:WorkflowViewState.IdRef="MergeDataTable_3" MissingSchemaAction="Add" Source="[out_dt_totaalOverzicht]" />
           </Sequence>
         </ui:CommentOut.Body>
         <sap:WorkflowViewStateService.ViewState>
@@ -1427,7 +1427,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:CommentOut>
-      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dt_totaaloverzicht]" DisplayName="Write Range dt_totaaloverzicht" sap:VirtualizedContainerService.HintSize="572,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Totaaloverzicht" WorkbookPath="Data\Output\dataNS.xlsx">
+      <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[out_dt_totaalOverzicht]" DisplayName="Write Range dt_totaaloverzicht" sap:VirtualizedContainerService.HintSize="572,116" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Totaaloverzicht" WorkbookPath="Data\Output\dataNS.xlsx">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1435,7 +1435,14 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:WriteRange>
-      <ui:LogMessage DisplayName="Log Message: Totaaloverzicht successful" sap:VirtualizedContainerService.HintSize="572,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Totaaloverzicht successful...&quot;]" />
+      <ui:LogMessage DisplayName="Log Message: Totaaloverzicht successful" sap:VirtualizedContainerService.HintSize="572,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Totaaloverzicht successful...&quot;]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
     </Sequence>
   </Sequence>
 </Activity>
