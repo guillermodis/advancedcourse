@@ -1,7 +1,7 @@
 {
   "name": "NSBotModis",
   "description": "Tabel aanmaken factuuroverzicht NS Businesscards",
-  "main": "Main.xaml",
+  "main": "Workflows\\Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.17.0-preview]",
     "UiPath.Mail.Activities": "[1.18.2]",
@@ -47,8 +47,8 @@
   "expressionLanguage": "VisualBasic",
   "entryPoints": [
     {
-      "filePath": "Main.xaml",
-      "uniqueId": "43fb9a89-f0c4-47f9-88b3-4f1334f2855f",
+      "filePath": "Workflows\\Main.xaml",
+      "uniqueId": "a2566565-9757-4602-b316-34f60d8148a1",
       "input": [],
       "output": []
     }
